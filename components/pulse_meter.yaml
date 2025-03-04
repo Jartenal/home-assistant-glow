@@ -65,6 +65,9 @@ sensor:
     filters:
       # multiply value = (60 / imp value) * 1000
       # - multiply: 60
+      - lambda: |-
+        if (x > 5000) return {};  // Ignore values above 5000W (adjust as needed)
+        return x
       - lambda: return x * ((60.0 / id(select_pulse_rate).state) * 1000.0);
 
     total:
